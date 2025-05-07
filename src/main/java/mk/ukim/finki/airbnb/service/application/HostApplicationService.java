@@ -3,6 +3,7 @@ package mk.ukim.finki.airbnb.service.application;
 import mk.ukim.finki.airbnb.dto.CreateHostDto;
 import mk.ukim.finki.airbnb.dto.DisplayHostDto;
 import mk.ukim.finki.airbnb.model.projections.HostNameProjection;
+import mk.ukim.finki.airbnb.model.views.HostsByCountryView;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface HostApplicationService {
     void delete(Long id);
     List<HostNameProjection> getAllHostNames();
     List<DisplayHostDto> findAllWithoutTemporaryReservations();
+    List<HostsByCountryView> getHostsGroupedByCountry();
 }

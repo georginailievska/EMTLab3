@@ -9,9 +9,9 @@ import mk.ukim.finki.airbnb.dto.DisplayHostDto;
 import mk.ukim.finki.airbnb.repository.CountryRepository;
 import mk.ukim.finki.airbnb.service.domain.HostService;
 import org.springframework.stereotype.Service;
+import mk.ukim.finki.airbnb.model.views.HostsByCountryView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class HostApplicationServiceImpl implements HostApplicationService {
@@ -63,4 +63,10 @@ public class HostApplicationServiceImpl implements HostApplicationService {
     public List<DisplayHostDto> findAllWithoutTemporaryReservations() {
         return DisplayHostDto.from(hostService.findAllWithoutTemporaryReservations());
     }
+
+    @Override
+    public List<HostsByCountryView> getHostsGroupedByCountry() {
+        return hostService.getHostsGroupedByCountry();
+    }
+
 }

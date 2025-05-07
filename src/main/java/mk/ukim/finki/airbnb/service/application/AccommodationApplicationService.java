@@ -3,6 +3,7 @@ package mk.ukim.finki.airbnb.service.application;
 import mk.ukim.finki.airbnb.dto.CreateAccommodationDto;
 import mk.ukim.finki.airbnb.dto.DisplayAccommodationDto;
 import mk.ukim.finki.airbnb.model.enumerations.Category;
+import mk.ukim.finki.airbnb.model.views.AccommodationsByHostView;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface AccommodationApplicationService {
     DisplayAccommodationDto getById(Long id);
     void delete(Long id);
     List<DisplayAccommodationDto> filter(String hostName, String hostSurname, Category category, Boolean rented, String name, Integer numRooms);
+    List<AccommodationsByHostView> getAccommodationsGroupedByHost();
 }

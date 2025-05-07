@@ -2,6 +2,7 @@ package mk.ukim.finki.airbnb.service.domain;
 
 import mk.ukim.finki.airbnb.model.domain.Host;
 import mk.ukim.finki.airbnb.model.projections.HostNameProjection;
+import mk.ukim.finki.airbnb.model.views.HostsByCountryView;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface HostService {
     void refreshHostsByCountryMaterializedView();
     List<HostNameProjection> getAllHostNames();
     List<Host> findAllWithoutTemporaryReservations();
+    List<HostsByCountryView> getHostsGroupedByCountry();
 }

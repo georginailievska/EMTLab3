@@ -11,6 +11,7 @@ import mk.ukim.finki.airbnb.events.HostUpdatedEvent;
 import mk.ukim.finki.airbnb.events.HostDeletedEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import mk.ukim.finki.airbnb.model.views.HostsByCountryView;
 
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class HostServiceImpl implements HostService {
 
     @Override
     public void refreshHostsByCountryMaterializedView() {
-        hostsByCountryViewRepository.refreshMaterializedView();
+        hostsByCountryViewRepository.refreshView();
     }
 
     @Override
@@ -86,4 +87,10 @@ public class HostServiceImpl implements HostService {
     public List<Host> findAllWithoutTemporaryReservations() {
         return hostRepository.findAllWithoutTemporaryReservations();
     }
+
+    @Override
+    public List<HostsByCountryView> getHostsGroupedByCountry() {
+        return hostsByCountryViewRepository.findAll();
+    }
+
 }

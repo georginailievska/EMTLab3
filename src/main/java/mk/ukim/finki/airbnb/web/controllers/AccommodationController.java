@@ -2,6 +2,7 @@ package mk.ukim.finki.airbnb.web.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import mk.ukim.finki.airbnb.model.enumerations.Category;
+import mk.ukim.finki.airbnb.model.views.AccommodationsByHostView;
 import mk.ukim.finki.airbnb.service.application.AccommodationApplicationService;
 import mk.ukim.finki.airbnb.dto.CreateAccommodationDto;
 import mk.ukim.finki.airbnb.dto.DisplayAccommodationDto;
@@ -68,5 +69,11 @@ public class AccommodationController {
                 name,
                 numRooms
         );
+    }
+
+    @Operation(summary = "Get number of accommodations per host", description = "Returns the number of accommodations grouped by host from a materialized view.")
+    @GetMapping("/by-host")
+    public ResponseEntity<List<AccommodationsByHostView>> getAccommodationsByHost() {
+        return ResponseEntity.ok(accommodationService.getAccommodationsGroupedByHost());
     }
 }

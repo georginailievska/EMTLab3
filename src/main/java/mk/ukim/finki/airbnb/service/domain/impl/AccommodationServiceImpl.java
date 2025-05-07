@@ -1,15 +1,16 @@
 package mk.ukim.finki.airbnb.service.domain.impl;
 
-import mk.ukim.finki.airbnb.dto.DisplayAccommodationDto;
 import mk.ukim.finki.airbnb.model.domain.Accommodation;
 import mk.ukim.finki.airbnb.model.domain.Host;
 import mk.ukim.finki.airbnb.model.enumerations.Category;
 import mk.ukim.finki.airbnb.model.exceptions.AccommodationNotFoundException;
 import mk.ukim.finki.airbnb.model.exceptions.HostNotFoundException;
 import mk.ukim.finki.airbnb.repository.AccommodationRepository;
+import mk.ukim.finki.airbnb.repository.AccommodationsByHostViewRepository;
 import mk.ukim.finki.airbnb.repository.HostRepository;
 import mk.ukim.finki.airbnb.service.domain.AccommodationService;
 import org.springframework.stereotype.Service;
+import mk.ukim.finki.airbnb.model.views.AccommodationsByHostView;
 
 import java.util.List;
 
@@ -17,11 +18,17 @@ import java.util.List;
 public class AccommodationServiceImpl implements AccommodationService {
 
     private final AccommodationRepository accommodationRepository;
+    private final AccommodationsByHostViewRepository accommodationsByHostViewRepository;
     private final HostRepository hostRepository;
 
-    public AccommodationServiceImpl(AccommodationRepository accommodationRepository, HostRepository hostRepository) {
+    public AccommodationServiceImpl(
+            AccommodationRepository accommodationRepository,
+            HostRepository hostRepository,
+            AccommodationsByHostViewRepository accommodationsByHostViewRepository
+    ) {
         this.accommodationRepository = accommodationRepository;
         this.hostRepository = hostRepository;
+        this.accommodationsByHostViewRepository = accommodationsByHostViewRepository;
     }
 
     @Override
@@ -66,6 +73,11 @@ public class AccommodationServiceImpl implements AccommodationService {
     @Override
     public void delete(Long id) {
         accommodationRepository.deleteById(id);
+    }
+
+    @Override
+    public List<AccommodationsByHostView> getAccommodationsGroupedByHost() {
+        return accommodationsByHostViewRepository.findAll();
     }
 
 }

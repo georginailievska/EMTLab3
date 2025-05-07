@@ -3,6 +3,7 @@ package mk.ukim.finki.airbnb.web.controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import mk.ukim.finki.airbnb.dto.CreateHostDto;
 import mk.ukim.finki.airbnb.dto.DisplayHostDto;
+import mk.ukim.finki.airbnb.model.views.HostsByCountryView;
 import mk.ukim.finki.airbnb.model.projections.HostNameProjection;
 import mk.ukim.finki.airbnb.service.application.HostApplicationService;
 import org.springframework.http.ResponseEntity;
@@ -63,5 +64,12 @@ public class HostController {
     public ResponseEntity<List<DisplayHostDto>> getHostsWithoutTemporaryReservations() {
         List<DisplayHostDto> hosts = hostService.findAllWithoutTemporaryReservations();
         return ResponseEntity.ok(hosts);
+    }
+
+    @Operation(summary = "Get number of hosts per country",
+            description = "Returns host count per country from a materialized view.")
+    @GetMapping("/by-country")
+    public ResponseEntity<List<HostsByCountryView>> getHostsByCountry() {
+        return ResponseEntity.ok(hostService.getHostsGroupedByCountry());
     }
 }

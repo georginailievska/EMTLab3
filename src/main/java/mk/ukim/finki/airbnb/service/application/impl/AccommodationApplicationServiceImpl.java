@@ -9,6 +9,7 @@ import mk.ukim.finki.airbnb.dto.DisplayAccommodationDto;
 import mk.ukim.finki.airbnb.repository.HostRepository;
 import mk.ukim.finki.airbnb.service.domain.AccommodationService;
 import org.springframework.stereotype.Service;
+import mk.ukim.finki.airbnb.model.views.AccommodationsByHostView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,5 +66,11 @@ public class AccommodationApplicationServiceImpl implements AccommodationApplica
     public void delete(Long id) {
         accommodationService.delete(id);
     }
+
+    @Override
+    public List<AccommodationsByHostView> getAccommodationsGroupedByHost() {
+        return accommodationService.getAccommodationsGroupedByHost();
+    }
+
 }
 
