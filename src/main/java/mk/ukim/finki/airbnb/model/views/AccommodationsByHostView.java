@@ -17,6 +17,10 @@ public class AccommodationsByHostView {
     @Column(name = "host_id")
     private Long hostId;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "accommodation_count")
     private Integer accommodationCount;
 }
+

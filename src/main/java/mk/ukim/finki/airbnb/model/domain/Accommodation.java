@@ -14,6 +14,7 @@ public class Accommodation {
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "category_enum")
     private Category category;
 
     private Integer numRooms;

@@ -12,8 +12,7 @@ public interface HostsByCountryViewRepository extends JpaRepository<HostsByCount
 
     @Modifying
     @Transactional
-    @Query(value = "REFRESH MATERIALIZED VIEW hosts_by_country", nativeQuery = true)
+    @Query(value = "REFRESH MATERIALIZED VIEW hosts_by_country;", nativeQuery = true)
     void refreshView();
 }
-
 

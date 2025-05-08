@@ -20,6 +20,8 @@ public class DataInitializer {
     private final HostRepository hostRepository;
     private final AccommodationRepository accommodationRepository;
     private final UserRepository userRepository;
+    private final HostsByCountryViewRepository hostsByCountryViewRepository;
+    private final AccommodationsByHostViewRepository accommodationsByHostViewRepository;
     private final PasswordEncoder passwordEncoder;
 
     public DataInitializer(
@@ -27,12 +29,16 @@ public class DataInitializer {
             HostRepository hostRepository,
             AccommodationRepository accommodationRepository,
             UserRepository userRepository,
+            HostsByCountryViewRepository hostsByCountryViewRepository,
+            AccommodationsByHostViewRepository accommodationsByHostViewRepository,
             PasswordEncoder passwordEncoder
     ) {
         this.countryRepository = countryRepository;
         this.hostRepository = hostRepository;
         this.accommodationRepository = accommodationRepository;
         this.userRepository = userRepository;
+        this.hostsByCountryViewRepository = hostsByCountryViewRepository;
+        this.accommodationsByHostViewRepository = accommodationsByHostViewRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -53,5 +59,10 @@ public class DataInitializer {
         User user = new User("user", passwordEncoder.encode("user"), "user", "user", Role.ROLE_USER);
         User admin = new User("admin", passwordEncoder.encode("admin"), "admin", "admin", Role.ROLE_ADMIN);
         userRepository.saveAll(List.of(user, admin));
+
+        // Refresh materialized views after data insertion
+        hostsByCountryViewRepository.refreshView();
+        accommodationsByHostViewRepository.refreshMaterializedView();
     }
 }
+
