@@ -15,11 +15,12 @@ public record DisplayAccommodationDto(
         boolean rented,
         Long hostId,
         String hostName,
-        String hostSurname
+        String hostSurname,
+        String hostCountryName,
+        String hostCountryContinent
 ) {
-
-    public static DisplayAccommodationDto from(Accommodation accommodation) {
-        return new DisplayAccommodationDto(
+    public static mk.ukim.finki.airbnb.dto.DisplayAccommodationDto from(Accommodation accommodation) {
+        return new mk.ukim.finki.airbnb.dto.DisplayAccommodationDto(
                 accommodation.getId(),
                 accommodation.getName(),
                 accommodation.getCategory(),
@@ -27,7 +28,9 @@ public record DisplayAccommodationDto(
                 accommodation.isRented(),
                 accommodation.getHost().getId(),
                 accommodation.getHost().getName(),
-                accommodation.getHost().getSurname()
+                accommodation.getHost().getSurname(),
+                accommodation.getHost().getCountry().getName(),
+                accommodation.getHost().getCountry().getContinent()
         );
     }
 

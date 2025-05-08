@@ -76,4 +76,10 @@ public class AccommodationController {
     public ResponseEntity<List<AccommodationsByHostView>> getAccommodationsByHost() {
         return ResponseEntity.ok(accommodationService.getAccommodationsGroupedByHost());
     }
+
+    @Operation(summary = "Get detailed accommodation info", description = "Returns id, name, category, numRooms, hostName, hostSurname, hostCountryName, hostCountryContinent.")
+    @GetMapping("/{id}/details")
+    public ResponseEntity<DisplayAccommodationDto> getDetails(@PathVariable Long id) {
+        return ResponseEntity.ok(accommodationService.getById(id));
+    }
 }
